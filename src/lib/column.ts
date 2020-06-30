@@ -1,9 +1,7 @@
-export interface IColumn extends Partial<number[]> { }
-
-export class Column extends Array implements IColumn {
+export class Column extends Array {
   public length: number = 0
 
-  public constructor( props1: IColumn | number ) {
+  public constructor( props1: number[] | number ) {
     super()
     if (typeof props1 === 'number') {
       const length = props1
