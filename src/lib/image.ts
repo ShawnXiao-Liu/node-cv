@@ -1,0 +1,1 @@
+import { IPixel } from './pixel'
