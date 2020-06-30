@@ -11,4 +11,5 @@ let count = 0;
 m1.map( (item, col, row) => {
   return count ++
 })
+console.log( m1.transpose() )
 // m1.transpose()

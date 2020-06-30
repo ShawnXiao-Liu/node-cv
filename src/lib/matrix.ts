@@ -16,18 +16,29 @@ interface IMatrix {
   map: (fcn: (item: any, columnIndex: number, rowIndex: number ) => any) => this
 }
 
-class Matrix implements IMatrix{
+class Matrix implements IMatrix {
   [index: number] : Column
   public column: MatrixColumn = 0
   public row: MatrixRow = 0
   public count: number = 0
   public size: [MatrixColumn, MatrixRow] = [this.column, this.row]
 
-  // Matrix columnAt
+  /**
+   * 
+   * @param colIndex
+   * @description Matrix的行查询方法，查询位于colIndex行的所有元素
+   * @returns 返回一个新的Row对象
+   */
   public columnAt = (colIndex: number): Column => {
     return this[colIndex]
   } 
-  // Matrix rowAt
+  
+  /**
+   * 
+   * @param rowIndex
+   * @description Matrix的列查询方法，查询位于rowIndex列的所有元素
+   * @returns 返回一个新的Row对象
+   */
   public rowAt = (rowIndex: number): Row => {
     const row: Row = []
     for (let col = 0; col < this.column; col ++) {
@@ -36,7 +47,11 @@ class Matrix implements IMatrix{
     return row
   } 
 
-  // Matrix copy
+  /**
+   * 
+   * @description Matrix的拷贝方法
+   * @returns 返回一个完全一致的Matrix对象
+   */
   public copy = (): Matrix => {
     const result: Column[] = []
     for (let col = 0; col < this.column; col ++) {
@@ -50,7 +65,11 @@ class Matrix implements IMatrix{
     return new Matrix(result)
   }
 
-  // Matrix transpose
+  /**
+   * 
+   * @description Matrix的转置方法，将矩阵的行列对调
+   * @returns 返回转置完的矩阵
+   */
   public transpose = (): Matrix => {
     this.setPrivateProperties(this.row, this.column)
     const cm = this.copy()
@@ -65,12 +84,23 @@ class Matrix implements IMatrix{
     return this
   }
 
-  // Matrix fill
+  /**
+   * 
+   * @param col 获取的行
+   * @param row 获取的列
+   * @description Matrix获取指定位置Cell的元素
+   * @returns Matrix位于col行row列的元素
+   */
   public cell = (col: number, row: number): any => {
     return this[col][row]
   }
 
-  // Matrix cell
+  /**
+   * 
+   * @param value 要填充的值
+   * @description 用指定的元素填充Matrix
+   * @returns 返回填充后的Matrix
+   */
   public fill = (value: number): this => {
     for (let col = 0; col < this.column; col ++) {
       for (let row = 0; row < this.row; row ++) {
@@ -80,7 +110,12 @@ class Matrix implements IMatrix{
     return this
   }
 
-  // Matrix forEach
+  /**
+   * 
+   * @param handler Matrix遍历所有元素时所执行的方法
+   * @description 按行遍历Matrix的所有元素，执行handler指定的方法
+   * @returns 返回当前Matrix
+   */
   public forEach = (handler: (item: any, columnIndex: number, rowIndex: number ) => void): this => {
     for (let col = 0; col < this.column; col ++) {
       for (let row = 0; row < this.row; row ++) {
@@ -90,7 +125,12 @@ class Matrix implements IMatrix{
     return this
   }
 
-  // Matrix map
+  /**
+   * 
+   * @param handler  Matrix遍历所有元素时所执行的方法
+   * @description 按行遍历Matrix的所有元素，执行handler以对Matrix的元素进行操作
+   * @returns 返回操作完成后的Matrix
+   */
   public map = (handler: (item: any, columnIndex: number, rowIndex: number ) => any): this => {
     for (let col = 0; col < this.column; col ++) {
       for (let row = 0; row < this.row; row ++) {
