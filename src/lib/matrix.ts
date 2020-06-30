@@ -13,7 +13,6 @@ export class Matrix extends Array implements IMatrix{
     for (let i = 0; i < height; i ++) {
       const column = new Array(width)
       this[i] = column
-      console.log()
     }
   }
 
