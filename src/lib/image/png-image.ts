@@ -1,5 +1,5 @@
 import Matrix from '../matrix'
-import Column from '../column'
+import { Column } from '../type/index'
 
 export interface IPngPixel {
   R: number

@@ -1,23 +1,23 @@
-import Matrix from '../matrix'
+// import Matrix from '../matrix'
 
-import IRgbImage from './rgb-image'
-import IPngImage from './png-image'
-import IBinaryImage from './binary-image'
-import IGrayScaleImage from './gray-scale-image'
+// import IRgbImage from './rgb-image'
+// import IPngImage from './png-image'
+// import IBinaryImage from './binary-image'
+// import IGrayScaleImage from './gray-scale-image'
 
-export class RGBImage implements IRgbImage{
-  public RedChannel: Matrix
-  public GreenChannel: Matrix
-  public BlueChannel: Matrix
+// export class RGBImage implements IRgbImage{
+//   public RedChannel: Matrix
+//   public GreenChannel: Matrix
+//   public BlueChannel: Matrix
 
-  constructor() {
-  }
-} 
+//   constructor() {
+//   }
+// } 
 
-export class BinaryImage implements IBinaryImage{
+// export class BinaryImage implements IBinaryImage{
 
-} 
+// } 
 
-export class GrayScaleImage implements IGrayScaleImage{
+// export class GrayScaleImage implements IGrayScaleImage{
 
-} 
+// } 

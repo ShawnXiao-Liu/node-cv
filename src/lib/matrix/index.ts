@@ -1,4 +1,4 @@
-import { MatrixColumn, MatrixRow, Column, Row } from './index'
+import { MatrixColumn, MatrixRow, Column, Row } from '../type'
 
 interface IMatrix {
   [index: number]: Column
@@ -6,7 +6,7 @@ interface IMatrix {
   row: MatrixRow
   count: number
   size: [MatrixColumn, MatrixRow]
-  fill: (num: number) => this
+  fill: (filler: any) => this
   cell: (col: number, row: number) => any
   copy: () => Matrix
   columnAt: (colIndex: number) => Column
@@ -71,7 +71,6 @@ class Matrix implements IMatrix {
    * @returns 返回转置完的矩阵
    */
   public transpose = (): Matrix => {
-    this.setPrivateProperties(this.row, this.column)
     const cm = this.copy()
     const result: Column[] = []
     for (let row = 0; row < this.row; row ++) {
@@ -81,6 +80,7 @@ class Matrix implements IMatrix {
       }
       this[row] = column
     }
+    this.setPrivateProperties(this.row, this.column)
     return this
   }
 
@@ -101,10 +101,10 @@ class Matrix implements IMatrix {
    * @description 用指定的元素填充Matrix
    * @returns 返回填充后的Matrix
    */
-  public fill = (value: number): this => {
+  public fill = (filler: any): this => {
     for (let col = 0; col < this.column; col ++) {
       for (let row = 0; row < this.row; row ++) {
-        this[col][row] = value
+        this[col][row] = filler
       }
     }
     return this
@@ -141,17 +141,22 @@ class Matrix implements IMatrix {
     return this
   }
 
-  private setPrivateProperties = (w: MatrixColumn, h: MatrixRow): void => {
-    this.column = h
-    this.row = w
-    this.size = [h, w]
-    this.count = <number>h * <number>w
+  private setPrivateProperties = (column: MatrixColumn, row: MatrixRow): void => {
+    this.column = column
+    this.row = row
+    this.size = [column, row]
+    this.count = column * row
   }
 
-  private buildMatrixWithColumns = (matrix: Column[]): void => {
-    this.setPrivateProperties(matrix[0] ? matrix[0].length : 0, matrix.length)
+  private buildMatrixWithColumns = (columns: Column[]): void => {
+    let maxLength = 0
+    columns.forEach( column => {
+      if (maxLength < column.length)
+        maxLength = column.length
+    })
+    this.setPrivateProperties(columns.length, maxLength)
 
-    matrix.forEach( (column, index) => {
+    columns.forEach( (column, index) => {
       this[index] = column
     })
   }
