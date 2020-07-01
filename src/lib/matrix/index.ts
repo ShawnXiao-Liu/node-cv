@@ -173,6 +173,7 @@ class Matrix implements IMatrix {
     if (typeof props1 !== 'number') {
       this.buildMatrixWithColumns(<Column[]>props1)
     } else {
+      console.log(props2)
       this.buildMatrixWithWidthAndHeight(<MatrixColumn>props1, <MatrixRow>props2)
     }
   }
